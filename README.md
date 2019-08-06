@@ -22,6 +22,14 @@ var authPayload = {
      'name': 'patrick'
 };
 
+// Add the callback
+var listenerId=ZenderPlayer.addEventListener('onZenderPlayerClose',function(s) {
+     console.log("received a close");
+
+     ZenderPlayer.stop(function() {}, function() {});
+     ZenderPlayer.removeEventListener(listenerId);
+}, function(e) {
+});
 
 ZenderPlayer.setAuthentication(authProvider, authPayload , function() {
 	ZenderPlayer.setTargetId(targetId, function() {
