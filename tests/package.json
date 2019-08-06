@@ -1,0 +1,11 @@
+{
+  "name": "cordova-plugin-zenderplayer-tests",
+  "version": "0.9.8",
+  "author": "Zender TV",
+  "homepage": "https://zender.tv",
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ]
+}

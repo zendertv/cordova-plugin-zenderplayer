@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-zenderplayer" version="0.9.8">
+    <name>Zender Player SDK</name>
+    <description>Cordova plugin for Zender Player SDK</description>
+    <keywords>cordova,livestreaming, interaction,trivia</keywords>
+    <js-module src="www/zender.js">
+        <clobbers target="ZenderPlayer" />
+    </js-module>
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.WAKE_LOCK"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+        <config-file target="config.xml" parent="/*">
+            <feature name="CordovaZenderPlayer">
+                <param name="android-package" value="tv.zender.cordova.CordovaZenderPlayer"/>
+            </feature>
+            <preference name="backgroundColor" value="0x00000000" /><!-- http://stackoverflow.com/a/18068662 -->
+        </config-file>
+        <source-file src="src/android/CordovaZenderPlayer.java" target-dir="src/tv/zender/cordova" />
+        <!-- the npm postinstall hook in package.json downloads and unzips the sdk -->
+        <resource-file src="zender-android-sdk-v2.0.5/phenix-sdk-2019.2.1.aar" target="libzender/phenix-sdk-2019.2.1.aar" />
+        <resource-file src="zender-android-sdk-v2.0.5/zender_core-2.0.5.aar" target="libzender/zender_core-2.0.5.aar" />
+        <resource-file src="zender-android-sdk-v2.0.5/zender_logger-2.0.5.aar" target="libzender/zender_logger-2.0.5.aar" />
+        <resource-file src="zender-android-sdk-v2.0.5/zender_phenix-2.0.5.aar" target="libzender/zender_phenix-2.0.5.aar" />
+        <framework src="src/android/libzender.gradle" custom="true" type="gradleReference" />
+    </platform>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="CordovaZenderPlayer">
+                <param name="ios-package" value="CordovaZenderPlayer" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/CordovaZenderPlayer.h" />
+        <source-file src="src/ios/CordovaZenderPlayer.m" />
+        <!-- the npm postinstall hook in package.json downloads and unzips the sdk -->
+        <framework src="zender-ios-sdk-v2.1.0/Zender.framework" custom="true" embed="true"/>
+        <framework src="zender-ios-sdk-v2.1.0/ZenderPhenix.framework" custom="true" embed="true"/>
+        <framework src="zender-ios-sdk-v2.1.0/PhenixSdk.framework" custom="true" embed="true" />
+        <framework src="libz.tbd" />
+        <framework src="libc++.tbd" />
+        <framework src="AudioToolbox.framework" />
+        <framework src="AVFoundation.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="CoreVideo.framework" />
+        <framework src="Foundation.framework" />
+        <framework src="QuartzCore.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="UIKit.framework" />
+        <framework src="VideoToolbox.framework" />
+        <framework src="MediaPlayer.framework" />
+        <framework src="AVKit.framework" />
+
+    </platform>
+</plugin>

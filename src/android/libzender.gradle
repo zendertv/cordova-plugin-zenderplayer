@@ -1,0 +1,15 @@
+repositories {
+  flatDir {
+      dirs 'src/main/libzender'
+   }
+}
+
+dependencies {
+  compile(name:'zender_core-2.0.5', ext:'aar')
+  compile(name:'zender_logger-2.0.5', ext:'aar')
+  compile(name:'zender_phenix-2.0.5', ext:'aar')
+  compile(name:'phenix-sdk-2019.2.1' , ext:'aar')
+  implementation 'com.google.code.gson:gson:2.8.2'
+  implementation 'com.squareup.picasso:picasso:2.5.2'
+}
+
