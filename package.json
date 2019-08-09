@@ -13,9 +13,6 @@
     "url": "https://github.com/zendertv/cordova-plugin-zenderplayer.git"
   },
   "scripts": {
-    "sdk:install:android": "node ./bin/install-sdk android",
-    "sdk:install:ios": "node ./bin/install-sdk ios",
-    "postinstall": "npm run sdk:install:android && npm run sdk:install:ios"
   },
   "dependencies": {
     "request": "^2.88.0",

@@ -21,7 +21,6 @@
             <preference name="backgroundColor" value="0x00000000" /><!-- http://stackoverflow.com/a/18068662 -->
         </config-file>
         <source-file src="src/android/CordovaZenderPlayer.java" target-dir="src/tv/zender/cordova" />
-        <!-- the npm postinstall hook in package.json downloads and unzips the sdk -->
         <framework src="src/android/libzender.gradle" custom="true" type="gradleReference" />
     </platform>
     <platform name="ios">
@@ -33,25 +32,17 @@
         </config-file>
         <header-file src="src/ios/CordovaZenderPlayer.h" />
         <source-file src="src/ios/CordovaZenderPlayer.m" />
-        <!-- the npm postinstall hook in package.json downloads and unzips the sdk -->
-        <framework src="zender-ios-sdk-v2.1.0/Zender.framework" custom="true" embed="true"/>
-        <framework src="zender-ios-sdk-v2.1.0/ZenderPhenix.framework" custom="true" embed="true"/>
-        <framework src="zender-ios-sdk-v2.1.0/PhenixSdk.framework" custom="true" embed="true" />
-        <framework src="libz.tbd" />
-        <framework src="libc++.tbd" />
-        <framework src="AudioToolbox.framework" />
-        <framework src="AVFoundation.framework" />
-        <framework src="CoreGraphics.framework" />
-        <framework src="CoreLocation.framework" />
-        <framework src="CoreMedia.framework" />
-        <framework src="CoreVideo.framework" />
-        <framework src="Foundation.framework" />
-        <framework src="QuartzCore.framework" />
-        <framework src="SystemConfiguration.framework" />
-        <framework src="UIKit.framework" />
-        <framework src="VideoToolbox.framework" />
-        <framework src="MediaPlayer.framework" />
-        <framework src="AVKit.framework" />
+        <podspec>
+      <config>
+        <source url="https://github.com/zendertv/Specs.git" />
+        <source url="https://github.com/CocoaPods/Specs.git"/>
+      </config>
+      <pods use-frameworks="true">
+        <pod name="Zender" spec="2.1.0"/>
+        <!-- This can be removed as it will be a dependency of Zender/Phenix -->
+        <!-- pod name="PhenixSdk"  spec="2019.2.1" / -->
+      </pods>
+    </podspec>
 
     </platform>
 </plugin>
