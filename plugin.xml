@@ -22,10 +22,6 @@
         </config-file>
         <source-file src="src/android/CordovaZenderPlayer.java" target-dir="src/tv/zender/cordova" />
         <!-- the npm postinstall hook in package.json downloads and unzips the sdk -->
-        <resource-file src="zender-android-sdk-v2.0.5/phenix-sdk-2019.2.1.aar" target="libzender/phenix-sdk-2019.2.1.aar" />
-        <resource-file src="zender-android-sdk-v2.0.5/zender_core-2.0.5.aar" target="libzender/zender_core-2.0.5.aar" />
-        <resource-file src="zender-android-sdk-v2.0.5/zender_logger-2.0.5.aar" target="libzender/zender_logger-2.0.5.aar" />
-        <resource-file src="zender-android-sdk-v2.0.5/zender_phenix-2.0.5.aar" target="libzender/zender_phenix-2.0.5.aar" />
         <framework src="src/android/libzender.gradle" custom="true" type="gradleReference" />
     </platform>
     <platform name="ios">
