@@ -38,7 +38,7 @@
         <source url="https://github.com/CocoaPods/Specs.git"/>
       </config>
       <pods use-frameworks="true">
-        <pod name="Zender" spec="2.3.0"/>
+        <pod name="Zender" spec="2.4.0"/>
       </pods>
     </podspec>
 
