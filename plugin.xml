@@ -38,9 +38,7 @@
         <source url="https://github.com/CocoaPods/Specs.git"/>
       </config>
       <pods use-frameworks="true">
-        <pod name="Zender" spec="2.1.0"/>
-        <!-- This can be removed as it will be a dependency of Zender/Phenix -->
-        <!-- pod name="PhenixSdk"  spec="2019.2.1" / -->
+        <pod name="Zender" spec="2.3.0"/>
       </pods>
     </podspec>
 
