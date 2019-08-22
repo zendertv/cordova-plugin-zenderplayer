@@ -34,6 +34,21 @@
     
     // Create a player configuration
     ZenderPlayerConfig* settingsConfig = [ZenderPlayerConfig configWithTargetId:targetId channelId:channelId];
+
+    /*
+    NSString *playerEndpoint=@"https://player2-native.zender.tv";
+    NSString *apiEndpoint=@"https://api.zender.tv";
+    NSString *logEndpoint=@"https://logs.zender.tv/v1/ingest/batch";
+    */
+
+    NSString *playerEndpoint=@"https://player2-native.staging.zender.tv";
+    NSString *apiEndpoint=@"https://api.staging.zender.tv";
+    NSString *logEndpoint=@"https://logs.staging.zender.tv/v1/ingest/batch";
+
+    [settingsConfig overridePlayerEndpointPrefix:playerEndpoint];
+    [settingsConfig overrideApiEndpointUrl:apiEndpoint];
+    [[ZenderLogger sharedInstance] overrideEndpoint:logEndpoint];
+
     player.config = settingsConfig;
 
     // Use authentication
@@ -44,6 +59,7 @@
     
     player.view.frame = self.webView.frame;
     player.view.hidden = false;
+    player.view.backgroundColor = [UIColor blackColor];
     
     [player start];
     
