@@ -10,7 +10,7 @@
 @implementation CordovaZenderPlayer {
     NSString *targetId;
     NSString *channelId;
-
+    
     NSString *environment;
     NSString *deviceToken;
     NSString *redeemCode;
@@ -25,14 +25,14 @@
 }
 
 - (id) init {
-     if (self = [super init]) {
-    targetId = nil;
-    channelId = nil;
-    authentication = nil;
-    player = nil;
-    environment = @"production";
-         debugEnabled = FALSE;
-     }
+    if (self = [super init]) {
+        targetId = nil;
+        channelId = nil;
+        authentication = nil;
+        player = nil;
+        environment = @"production";
+        debugEnabled = FALSE;
+    }
     return self;
 }
 
@@ -74,7 +74,14 @@
     if (redeemCode) {
         [player redeemCodeQuiz:redeemCode];
     }
-        
+    
+    // Set the background
+    if (backgroundColor) {
+        player.view.backgroundColor = [CordovaZenderPlayer colorWithHexString:backgroundColor];
+    } else {
+        player.view.backgroundColor = [UIColor blackColor];
+    }
+    
     player.config = settingsConfig;
     
     // Use authentication
@@ -86,11 +93,7 @@
     player.view.frame = self.webView.frame;
     player.view.hidden = false;
     
-    if (backgroundColor) {
-        
-    } else {
-        player.view.backgroundColor = [UIColor blackColor];
-    }
+    
     
     [player start];
     
@@ -98,6 +101,22 @@
     [self.commandDelegate sendPluginResult: [CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId: command.callbackId];
     
     
+}
+
+
++ (UIColor *)colorWithHexString:(NSString *)stringToConvert
+{
+    NSString *noHashString = [stringToConvert stringByReplacingOccurrencesOfString:@"#" withString:@""]; // remove the #
+    NSScanner *scanner = [NSScanner scannerWithString:noHashString];
+    [scanner setCharactersToBeSkipped:[NSCharacterSet symbolCharacterSet]]; // remove + and $
+    
+    unsigned hex;
+    if (![scanner scanHexInt:&hex]) return nil;
+    int r = (hex >> 16) & 0xFF;
+    int g = (hex >> 8) & 0xFF;
+    int b = (hex) & 0xFF;
+    
+    return [UIColor colorWithRed:r / 255.0f green:g / 255.0f blue:b / 255.0f alpha:1.0f];
 }
 
 #pragma mark Player Getters/Setters
@@ -122,20 +141,28 @@
 
 - (void) setConfig: (CDVInvokedUrlCommand*) command {
     
-    // debugEnabled
-    // deviceToken
-    // backgroundColor
-    // redeemCode
-    
     NSDictionary *jsonConfig = command.arguments[0];
-
+    
     if (jsonConfig) {
-        // needs check key
-       // debugEnabled = [[jsonConfig objectForKey:@"debug"] boolValue];
-       // deviceToken = [[jsonConfig objectForKey:@"deviceToken"] string];
-       // redeemCode = [[jsonConfig objectForKey:@"redeemCode"] string];
-        // environment = [[jsonConfig objectForKey:@"environment"] string];
-
+        if ([jsonConfig objectForKey:@"debug"]) {
+            debugEnabled = [[jsonConfig objectForKey:@"debug"] boolValue];
+        }
+        
+        if ([jsonConfig objectForKey:@"deviceToken"]) {
+            deviceToken = [[jsonConfig objectForKey:@"deviceToken"] stringValue];
+        }
+        
+        if ([jsonConfig objectForKey:@"redeemCode"]) {
+            redeemCode = [[jsonConfig objectForKey:@"redeemCode"] stringValue];
+        }
+        
+        if ([jsonConfig objectForKey:@"environment"]) {
+            environment = [[jsonConfig objectForKey:@"environment"] stringValue];
+        }
+        
+        if ([jsonConfig objectForKey:@"backgroundColor"]) {
+            backgroundColor = [[jsonConfig objectForKey:@"backgroundColor"] stringValue];
+        }
     }
     
     [self.commandDelegate sendPluginResult: [CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId: command.callbackId];
