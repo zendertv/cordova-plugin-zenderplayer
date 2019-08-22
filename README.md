@@ -4,7 +4,7 @@ Note: This is work in progress.
 
 ## Installation
 In your Cordova project, run:
-	`cordova plugin add https://github.com/zendertv/cordova-plugin-zenderplayer#v0.0.1`
+	`cordova plugin add https://github.com/zendertv/cordova-plugin-zenderplayer#v1.1.0`
 
 ## Usage
 
