@@ -93,8 +93,6 @@
     player.view.frame = self.webView.frame;
     player.view.hidden = false;
     
-    
-    
     [player start];
     
     [self.webView.superview insertSubview: player.view aboveSubview:self.webView];
@@ -151,17 +149,18 @@
         if ([jsonConfig objectForKey:@"deviceToken"]) {
             deviceToken = [[jsonConfig objectForKey:@"deviceToken"] stringValue];
         }
-        
+
         if ([jsonConfig objectForKey:@"redeemCode"]) {
             redeemCode = [[jsonConfig objectForKey:@"redeemCode"] stringValue];
         }
         
-        if ([jsonConfig objectForKey:@"environment"]) {
-            environment = [[jsonConfig objectForKey:@"environment"] stringValue];
-        }
         
         if ([jsonConfig objectForKey:@"backgroundColor"]) {
-            backgroundColor = [[jsonConfig objectForKey:@"backgroundColor"] stringValue];
+            backgroundColor = [NSString stringWithString:[jsonConfig objectForKey:@"backgroundColor"]];
+        }
+        
+        if ([jsonConfig objectForKey:@"environment"]) {
+            environment = [NSString stringWithString:[jsonConfig objectForKey:@"environment"]];
         }
     }
     
@@ -192,7 +191,7 @@
 }
 
 - (void)zenderPlayer:(ZenderPlayer *)zenderPlayer onZenderQuizShareCode:(NSDictionary *)payload {
-    [zenderPlayer sharePayload:payload controller:self];
+    [zenderPlayer sharePayload:payload controller:self.viewController];
 }
 
 @end
